@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 // Destructuring
-const book = getBook(2); // &&&&&&& change book to 1 or 2 to test &&&&&
+const book = getBook(2); // &&&&&&& change book ID here to 1 or 2 to test &&&&&
 book;
 
 // const title = book.title;
@@ -153,8 +153,6 @@ book;
 
 const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
   book;
-
-console.log(author, title, genres);
 
 console.log(author, title, genres);
 
@@ -176,16 +174,19 @@ const updatedBook = {
   // adding a new property:
   moviePublicationDate: "2001-12-19",
   // overwriting an existing property. Whatever comes last will be in effect, so the ...book
-  // has to be first, before this next line, to make the next line correct the number of pages:
+  // has to be first, before this next line, to make the next line change the number of pages:
   pages: 1210,
 };
 updatedBook;
 
-const summary = `${title}, a ${pages}-long book, was written by ${author} and published in ${
+// template literals. Any JavaScript expression can be inside the curly braces
+const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${
   publicationDate.split("-")[0]
-} is a book`;
+}.`;
 summary;
 
+// ternaries, instead of if / else expressions. If the condition (before the ?) is true,
+//    result is the first expression (between ? and : ) else, second expression (after the :)
 const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
 pagesRange;
 
@@ -195,6 +196,12 @@ const summary2 = `${title}, a ${pages}-long book, was written by ${author} and p
   publicationDate.split("-")[0]
 }. The book has ${hasMovieAdaptation ? "" : "not"} been adapted as a movie`;
 summary2;
+
+// This split prints only the year in the publication date, which is 1954-07-29
+// ${publicationDate.split("-")[0]}
+
+// [0] means take the first element from the string. Putting [1] instead results
+//      in it printing 07 instead of 1954.
 
 // arrow functions
 
@@ -208,7 +215,7 @@ summary2;
 // The same function as above, written as an arrow function instead:
 (str) => str.split("-")[0];
 
-// This is a function expression:
+// This is a function expression. The () around str allow for multiple parameters.
 const getYear = (str) => str.split("-")[0];
 
 // short circuiting and logical operators
@@ -230,3 +237,10 @@ countWrong; // results in "no data" if there are 0 reviews, which is incorrect
 // Use this instead:
 const count = book.reviews.librarything.reviewsCount ?? "no data";
 count; // now, this is correctly 0 if there are 0 reviews
+
+function getTotalReviewCount(book) {
+  const goodread = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything.reviewsCount;
+}
+
+getTotalReviewCount(book);
