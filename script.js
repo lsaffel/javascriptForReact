@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 // Destructuring
-const book = getBook(2); // &&&&&&& change book ID here to 1 or 2 to test &&&&&
+const book = getBook(3); // &&&&&&& change book ID here to 1 or 2 to test &&&&&
 book;
 
 // const title = book.title;
@@ -230,17 +230,32 @@ console.log(true || "Some string"); // value is true
 console.log(false || "Some string"); // value is "Some string"
 
 // nullish coalescing
-console.log(book.reviews.librarything.reviewsCount);
-const countWrong = book.reviews.librarything.reviewsCount || "no data";
-countWrong; // results in "no data" if there are 0 reviews, which is incorrect
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "no data";
+// countWrong; // results in "no data" if there are 0 reviews, which is incorrect
 
 // Use this instead:
-const count = book.reviews.librarything.reviewsCount ?? "no data";
-count; // now, this is correctly 0 if there are 0 reviews
+// const count = book.reviews.librarything.reviewsCount ?? "no data";
+// count; // now, this is correctly 0 if there are 0 reviews
 
 function getTotalReviewCount(book) {
-  const goodread = book.reviews.goodreads.reviewsCount;
-  const librarything = book.reviews.librarything.reviewsCount;
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
 }
 
-getTotalReviewCount(book);
+/*
+librarything?		< this question mark is in case that property is undefined, then that 
+			will not be evaluated
+
+The 
+book.reviews.librarything?.reviewsCount ?? 0 
+results in the expression becoming 0 in the case that the 
+first part of the expression is undefined.
+
+The ? can be after any part where we are not sure that the data exists, so it could be:
+const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+*/
+
+console.log(getTotalReviewCount(book));
