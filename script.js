@@ -144,6 +144,8 @@ function getBook(id) {
 }
 
 // Destructuring
+
+/*
 const book = getBook(3); // &&&&&&& change book ID here to 1 or 2 to test &&&&&
 book;
 
@@ -244,7 +246,7 @@ function getTotalReviewCount(book) {
   librarything;
   return goodreads + librarything;
 }
-
+*/
 /*
 librarything?		< this question mark is in case that property is undefined, then that 
 			will not be evaluated
@@ -258,4 +260,4 @@ The ? can be after any part where we are not sure that the data exists, so it co
 const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 */
 
-console.log(getTotalReviewCount(book));
+// console.log(getTotalReviewCount(book));
