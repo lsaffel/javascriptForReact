@@ -261,3 +261,35 @@ const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 */
 
 // console.log(getTotalReviewCount(book));
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
+}
+
+const books = getBooks();
+books;
+
+// an example of how to map
+const x = [1, 2, 3, 4, 5].map((ella) => ella * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles; // an array, which only contains the titles
+
+// const essentialData = books.map((book) => {
+//   return {
+//     title: book.title,
+//     author: book.author,
+//   };
+// });
+
+// a cleaner way to write the above, removing the return{} and replacing with ():
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+essentialData;
